@@ -28,6 +28,7 @@ $container\
 $jobs\
 $memory_usage\
 $battery\
+${custom.battery}\
 ${custom.keyboard_layout}\
 $time\
 $cmd_duration\
@@ -320,14 +321,28 @@ symbol = "󰓅"
 style = "fg:color_memory"
 format = '[ $symbol( ${ram}) ]($style)'
 
+[custom.battery]
+command = """
+battery_info=$(starship module battery)
+if [ -n "$battery_info" ]; then
+    percent=$(echo "$battery_info" | grep -o '[0-9]*%%' | sed 's/%%//')
+    if [ "$percent" -le "${STARSHIP_COCKPIT_BATTERY_THRESHOLD:-0}" ]; then
+        echo "$battery_info" | sed 's/%%/%/'
+    fi
+fi
+"""
+when = '[ "${STARSHIP_COCKPIT_BATTERY_ENABLED:-false}" = "true" ]'
+format = "( $output )"
+disabled = false
+
 [battery]
 full_symbol = "󰁹"
 charging_symbol = "󰂄"
 discharging_symbol = "󰂃"
 unknown_symbol = "󰂑"
 empty_symbol = "󰂎"
-format = '[ $symbol( $percentage) ]($style)'
-disabled = false
+format = '( [$symbol( $percentage)]($style) )'
+disabled = true
 
 [[battery.display]]
 threshold = 10
@@ -336,6 +351,10 @@ style = "bold fg:color_danger"
 [[battery.display]]
 threshold = 20
 style = "fg:color_caution"
+
+[[battery.display]]
+threshold = 100
+style = "fg:color_other"
 
 [time]
 disabled = false
