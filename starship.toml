@@ -28,6 +28,7 @@ $container\
 $jobs\
 $memory_usage\
 $battery\
+${custom.keyboard_layout}\
 $time\
 $cmd_duration\
 $status\
@@ -58,6 +59,7 @@ color_jobs = ''
 color_memory = ''
 color_time = ''
 color_duration = ''
+color_other = ''
 
 color_vimcmd_ok = 'green'
 color_vimcmd_replace = 'purple'
@@ -82,8 +84,9 @@ color_shell = '#a89984'
 color_container = '#cc241d'
 color_jobs = '#d5c4a1'
 color_memory = '#d5c4a1'
-color_time = '#d5c4a1'
+color_time = '#fbf1c7'
 color_duration = '#fbf1c7'
+color_other = '#fbf1c7'
 
 color_vimcmd_ok = '#8ec07c'
 color_vimcmd_replace = '#b16286'
@@ -108,8 +111,9 @@ color_shell = '#7c6f64'
 color_container = '#cc241d'
 color_jobs = '#504945'
 color_memory = '#504945'
-color_time = '#504945'
+color_time = '#282828'
 color_duration = '#282828'
+color_other = '#282828'
 
 color_vimcmd_ok = '#689d6a'
 color_vimcmd_replace = '#b16286'
@@ -371,3 +375,27 @@ vimcmd_symbol = '[❮](bold fg:color_vimcmd_ok)'
 vimcmd_replace_one_symbol = '[❮](bold fg:color_vimcmd_replace)'
 vimcmd_replace_symbol = '[❮](bold fg:color_vimcmd_replace)'
 vimcmd_visual_symbol = '[❮](bold fg:color_vimcmd_visual)'
+
+[custom.keyboard_layout]
+command = """
+
+# Set env variables if you want to use layout aliases (in uppercase)
+#     export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ABC=ENG
+#     export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_UKRAINIAN=UKR
+# 
+# Implementations:
+#     macOS
+
+if [ "$(uname -s)" = "Darwin" ]; then
+        input_source=$(defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleCurrentKeyboardLayoutInputSourceID)
+        layout_id=$(echo "$input_source" | cut -d '.' -f4)
+        layout=$(printenv "STARSHIP_COCKPIT_KEYBOARD_LAYOUT_$(echo "$layout_id" | tr '[:lower:]' '[:upper:]')")
+        echo "$layout" || echo "$layout_id"
+fi
+
+"""
+symbol = "󰌌"
+style = "fg:color_other"
+format = '[( $symbol $output )]($style)'
+when = '[ "${STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED:-false}" = "true" ]'
+disabled = false
