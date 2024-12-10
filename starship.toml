@@ -58,11 +58,9 @@ color_kubernetes = 'purple'
 color_docker = 'blue'
 color_shell = ''
 color_container = ''
-color_jobs = ''
-color_memory = ''
+color_other = ''
 color_time = ''
 color_duration = ''
-color_other = ''
 
 color_vimcmd_ok = 'green'
 color_vimcmd_replace = 'purple'
@@ -85,11 +83,9 @@ color_kubernetes = '#b16286'
 color_docker = '#458588'
 color_shell = '#a89984'
 color_container = '#cc241d'
-color_jobs = '#d5c4a1'
-color_memory = '#d5c4a1'
+color_other = '#d5c4a1'
 color_time = '#fbf1c7'
 color_duration = '#fbf1c7'
-color_other = '#fbf1c7'
 
 color_vimcmd_ok = '#8ec07c'
 color_vimcmd_replace = '#b16286'
@@ -112,11 +108,9 @@ color_kubernetes = '#b16286'
 color_docker = '#458588'
 color_shell = '#7c6f64'
 color_container = '#cc241d'
-color_jobs = '#504945'
-color_memory = '#504945'
+color_other = '#504945'
 color_time = '#282828'
 color_duration = '#282828'
-color_other = '#282828'
 
 color_vimcmd_ok = '#689d6a'
 color_vimcmd_replace = '#b16286'
@@ -311,7 +305,7 @@ format = '[ $symbol $name ]($style)'
 
 [jobs]
 symbol = "󰒋"
-style = "fg:color_jobs"
+style = "fg:color_other"
 format = '[ $symbol( $number) ]($style)'
 symbol_threshold = 1
 number_threshold = 1
@@ -320,7 +314,7 @@ number_threshold = 1
 disabled = false
 threshold = 95
 symbol = "󰓅"
-style = "fg:color_memory"
+style = "fg:color_other"
 format = '[ $symbol( ${ram}) ]($style)'
 
 [custom.battery]
