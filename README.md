@@ -53,3 +53,39 @@ palette = "gruvbox_dark"
 ```toml
 palette = "gruvbox_light"
 ```
+
+## Configuration
+
+### Battery
+
+Environment variables:
+
+| Variable | Default | Description  |
+| -------- | ------- | ------------ |
+| `STARSHIP_COCKPIT_BATTERY_ENABLED` | `false` | Enable or disable the battery module. |
+| `STARSHIP_COCKPIT_BATTERY_THRESHOLD` | `100` | Set the battery threshold. |
+
+Example configuration:
+```bash
+export STARSHIP_COCKPIT_BATTERY_ENABLED=true
+export STARSHIP_COCKPIT_BATTERY_THRESHOLD=10
+```
+
+### Keyboard Layout
+
+> [!NOTE]
+> Currently, the keyboard layout module is only supported on macOS. Support for other operating systems may be added in the future.
+
+Environment variables:
+
+| Variable | Default | Description |
+| -------- | ------- | ----------- |
+| `STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED` | `false` | Enable or disable the keyboard layout module. |
+| `STARSHIP_COCKPIT_KEYBOARD_LAYOUT_[LAYOUT_ID]` | - | Custom alias for layout. |
+
+Example configuration:
+```bash
+export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED=true
+export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ABC=ENG
+export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_UKRAINIAN=UKR
+```
