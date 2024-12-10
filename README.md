@@ -36,7 +36,7 @@ palette = "default"
 ```
 
 > [!IMPORTANT]
-> The default palette uses standard terminal colors, ensuring it blends with your terminal color scheme. In the image you can see the [Catppuccin Mocha](https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/catppuccin-mocha.itermcolors) iTerm2 color scheme.
+> The default palette uses standard terminal colors, ensuring it blends with your terminal color scheme. In the image you can see the [Tokyo Night](https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/tokyonight.itermcolors) iTerm2 color scheme.
 
 ### Gruvbox Dark
 
@@ -56,14 +56,39 @@ palette = "gruvbox_light"
 
 ## Configuration
 
-### Battery
+Environment variables can be set in your shell's configuration file:
+- Bash: `~/.bashrc`
+- Zsh: `~/.zshrc`
+- Fish: `~/.config/fish/config.fish`
+- PowerShell: PowerShell profile
+
+Remember to restart your shell after setting environment variables.
+
+### Memory Usage
+
+![Starship Cockpit Memory Usage](./assets/configuration/memory_usage.png)
 
 Environment variables:
 
-| Variable | Default | Description  |
-| -------- | ------- | ------------ |
-| `STARSHIP_COCKPIT_BATTERY_ENABLED` | `false` | Enable or disable the battery module. |
-| `STARSHIP_COCKPIT_BATTERY_THRESHOLD` | `100` | Set the battery threshold. |
+| Variable | Default | Possible values | Description  |
+| -------- | ------- | --------------- | ------------ |
+| `STARSHIP_COCKPIT_MEMORY_USAGE_ENABLED` | `false` | `true`, `false` | Enable or disable the memory usage module. |
+
+Example configuration:
+```bash
+export STARSHIP_COCKPIT_MEMORY_USAGE_ENABLED=true
+```
+
+### Battery
+
+![Starship Cockpit Battery](./assets/configuration/battery.png)
+
+Environment variables:
+
+| Variable | Default | Possible values | Description  |
+| -------- | ------- | --------------- | ------------ |
+| `STARSHIP_COCKPIT_BATTERY_ENABLED` | `false` | `true`, `false` | Enable or disable the battery module. |
+| `STARSHIP_COCKPIT_BATTERY_THRESHOLD` | `100` | `0` - `100` | Set the battery threshold in percentage when the battery info will start to be shown. |
 
 Example configuration:
 ```bash
@@ -73,15 +98,17 @@ export STARSHIP_COCKPIT_BATTERY_THRESHOLD=10
 
 ### Keyboard Layout
 
+![Starship Cockpit Keyboard Layout](./assets/configuration/keyboard_layout.png)
+
 > [!NOTE]
 > Currently, the keyboard layout module is only supported on macOS. Support for other operating systems may be added in the future.
 
 Environment variables:
 
-| Variable | Default | Description |
-| -------- | ------- | ----------- |
-| `STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED` | `false` | Enable or disable the keyboard layout module. |
-| `STARSHIP_COCKPIT_KEYBOARD_LAYOUT_[LAYOUT_ID]` | - | Custom alias for layout. |
+| Variable | Default | Possible values | Description  |
+| -------- | ------- | --------------- | ------------ |
+| `STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED` | `false` | `true`, `false` | Enable or disable the keyboard layout module. |
+| `STARSHIP_COCKPIT_KEYBOARD_LAYOUT_[LAYOUT_ID]` | - | - | Custom alias for layout. |
 
 Example configuration:
 ```bash
