@@ -28,8 +28,7 @@ $kubernetes\
 $shell\
 $container\
 $jobs\
-$memory_usage\
-$battery\
+${custom.memory_usage}\
 ${custom.battery}\
 ${custom.keyboard_layout}\
 $time\
@@ -310,12 +309,18 @@ format = '[ $symbol( $number) ]($style)'
 symbol_threshold = 1
 number_threshold = 1
 
-[memory_usage]
+[custom.memory_usage]
+command = "starship module memory_usage"
+when = '[ "${STARSHIP_COCKPIT_MEMORY_USAGE_ENABLED:-false}" = "true" ]'
+format = "( $output )"
 disabled = false
-threshold = 95
+
+[memory_usage]
+threshold = 0
 symbol = "󰓅"
 style = "fg:color_other"
-format = '[ $symbol( ${ram}) ]($style)'
+format = '( [$symbol( ${ram})]($style) )'
+disabled = false
 
 [custom.battery]
 command = """
@@ -338,7 +343,7 @@ discharging_symbol = "󰂃"
 unknown_symbol = "󰂑"
 empty_symbol = "󰂎"
 format = '( [$symbol( $percentage)]($style) )'
-disabled = true
+disabled = false
 
 [[battery.display]]
 threshold = 10
