@@ -11,13 +11,25 @@ actions = [
     },
     {
         "type": "set_iterm_window_size",
-        "columns": 125,
+        "columns": 145,
         "rows": 29,
         "delay_after": 1/2,
     },
     {
         "type": "command",
         "command": "export DISABLE_AUTO_TITLE=true",
+        "delay_after": 1/2,
+    },
+    {
+        "type": "command_list",
+        "commands": [
+            "export STARSHIP_COCKPIT_BATTERY_ENABLED=true",
+            "export STARSHIP_COCKPIT_BATTERY_THRESHOLD=100",
+            "export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED=true",
+            "export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ABC=ENG",
+            "export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_UKRAINIAN=UKR",
+        ],
+        "command_delay": 1,
         "delay_after": 1/2,
     },
     {
@@ -84,7 +96,7 @@ actions = [
     },
     {
         "type": "set_iterm_window_size",
-        "columns": 125,
+        "columns": 145,
         "rows": 5,
         "delay_after": 1/2,
     },
