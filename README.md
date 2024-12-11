@@ -2,7 +2,7 @@
 
 This is a preset for the [Starship](https://starship.rs/) cross-shell prompt.
 
-![Starship Cockpit Demo](./assets/demo.png)
+![Starship Cockpit Demo](./assets/images/demo.png)
 
 ## Requirements
 
@@ -29,7 +29,7 @@ This preset includes predefined palettes that you can enable by setting the `pal
 
 ### Default
 
-![Starship Cockpit Default Palette](./assets/palettes/default.png)
+![Starship Cockpit Default Palette](./assets/images/palettes/default.png)
 
 ```toml
 palette = "default"
@@ -40,7 +40,7 @@ palette = "default"
 
 ### Gruvbox Dark
 
-![Starship Cockpit Gruvbox Dark Palette](./assets/palettes/gruvbox_dark.png)
+![Starship Cockpit Gruvbox Dark Palette](./assets/images/palettes/gruvbox_dark.png)
 
 ```toml
 palette = "gruvbox_dark"
@@ -48,7 +48,7 @@ palette = "gruvbox_dark"
 
 ### Gruvbox Light
 
-![Starship Cockpit Gruvbox Light Palette](./assets/palettes/gruvbox_light.png)
+![Starship Cockpit Gruvbox Light Palette](./assets/images/palettes/gruvbox_light.png)
 
 ```toml
 palette = "gruvbox_light"
@@ -66,7 +66,7 @@ Remember to restart your shell after setting environment variables.
 
 ### Memory Usage
 
-![Starship Cockpit Memory Usage](./assets/configuration/memory_usage.png)
+![Starship Cockpit Memory Usage](./assets/images/configuration/memory_usage.png)
 
 Environment variables:
 
@@ -81,7 +81,7 @@ export STARSHIP_COCKPIT_MEMORY_USAGE_ENABLED=true
 
 ### Battery
 
-![Starship Cockpit Battery](./assets/configuration/battery.png)
+![Starship Cockpit Battery](./assets/images/configuration/battery.png)
 
 Environment variables:
 
@@ -98,7 +98,7 @@ export STARSHIP_COCKPIT_BATTERY_THRESHOLD=10
 
 ### Keyboard Layout
 
-![Starship Cockpit Keyboard Layout](./assets/configuration/keyboard_layout.png)
+![Starship Cockpit Keyboard Layout](./assets/images/configuration/keyboard_layout.png)
 
 > [!NOTE]
 > Currently, the keyboard layout module is only supported on macOS. Support for other operating systems may be added in the future.

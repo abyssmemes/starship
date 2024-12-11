@@ -1,6 +1,6 @@
 import os
 import time
-from PIL import ImageGrab
+from PIL import ImageGrab, Image
 import applescript
 import signal
 
@@ -72,7 +72,7 @@ def scene_demo():
             "test",
         ]),
         # ---- Make screenshot -----------------------------------------------
-        *actions_screenshot("assets/demo.png"),
+        *actions_screenshot("assets/images/demo.png"),
         # ---- Cleanup -------------------------------------------------------
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT),
         *actions_clear(),
@@ -94,7 +94,7 @@ def scene_palettes():
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT_SINGLE),
         *actions_clear(),
         # ---- Make screenshot -----------------------------------------------
-        *actions_screenshot("assets/palettes/default.png"),
+        *actions_screenshot("assets/images/palettes/default.png"),
         # ---- Cleanup -------------------------------------------------------
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT),
         *actions_clear(),
@@ -108,7 +108,7 @@ def scene_palettes():
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT_SINGLE),
         *actions_clear(),
         # ---- Make screenshot -----------------------------------------------
-        *actions_screenshot("assets/palettes/gruvbox_dark.png"),
+        *actions_screenshot("assets/images/palettes/gruvbox_dark.png"),
         # ---- Cleanup -------------------------------------------------------
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT),
         *actions_clear(),
@@ -122,7 +122,7 @@ def scene_palettes():
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT_SINGLE),
         *actions_clear(),
         # ---- Make screenshot -----------------------------------------------
-        *actions_screenshot("assets/palettes/gruvbox_light.png"),
+        *actions_screenshot("assets/images/palettes/gruvbox_light.png"),
         # ---- Cleanup -------------------------------------------------------
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT),
         *actions_clear(),
@@ -154,7 +154,7 @@ def scene_configuration():
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT_SINGLE),
         *actions_clear(),
         # ---- Make screenshot -----------------------------------------------
-        *actions_screenshot("assets/configuration/memory_usage.png"),
+        *actions_screenshot("assets/images/configuration/memory_usage.png"),
         # ---- Cleanup -------------------------------------------------------
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT),
         *actions_command_list([
@@ -172,7 +172,7 @@ def scene_configuration():
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT_SINGLE),
         *actions_clear(),
         # ---- Make screenshot -----------------------------------------------
-        *actions_screenshot("assets/configuration/battery.png"),
+        *actions_screenshot("assets/images/configuration/battery.png"),
         # ---- Cleanup -------------------------------------------------------
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT),
         *actions_command_list([
@@ -191,7 +191,7 @@ def scene_configuration():
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT_SINGLE),
         *actions_clear(),
         # ---- Make screenshot -----------------------------------------------
-        *actions_screenshot("assets/configuration/keyboard_layout.png"),
+        *actions_screenshot("assets/images/configuration/keyboard_layout.png"),
         # ---- Cleanup -------------------------------------------------------
         *actions_iterm_window_size(WINDOW_WIDTH, WINDOW_HEIGHT),
         *actions_command_list([
@@ -377,8 +377,30 @@ def process_actions(*actions):
                 x, y, width, height = bounds.out.strip("{}").split(",")
                 x, y, width, height = map(int, [x, y, width, height])
 
+                # Capture screenshot
                 screenshot = ImageGrab.grab(bbox=(x, y, width, height))
-                screenshot.save(action["filepath"])
+                
+                # Create a new image with transparency
+                rounded = Image.new('RGBA', screenshot.size, (0, 0, 0, 0))
+                
+                # Create mask with rounded corners
+                mask = Image.new('L', screenshot.size, 0)
+                radius = 10  # Corner radius
+                
+                # Draw rounded rectangle on mask
+                from PIL import ImageDraw
+                draw = ImageDraw.Draw(mask)
+                draw.rounded_rectangle([(0, 0), (screenshot.size[0]-1, screenshot.size[1]-1)], 
+                                     radius=radius, fill=255)
+                
+                # Convert screenshot to RGBA if it isn't already
+                screenshot = screenshot.convert('RGBA')
+                
+                # Paste using the mask
+                rounded.paste(screenshot, (0, 0), mask)
+                
+                # Save with transparency
+                rounded.save(action["filepath"], format='PNG')
 
         elif action["type"] == "set_palette":
             palette_name = action["palette"]
