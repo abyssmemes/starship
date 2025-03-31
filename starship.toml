@@ -25,7 +25,7 @@ $python\
 $package\
 $docker_context\
 $kubernetes\
-$shell\
+${custom.shell}\
 $container\
 $jobs\
 ${custom.memory_usage}\
@@ -279,6 +279,12 @@ format = '[( $symbol( $context) )]($style)'
 symbol = "󱃾"
 style = "fg:color_kubernetes"
 format = '[( $symbol( $cluster) )]($style)'
+disabled = false
+
+[custom.shell]
+command = "starship module shell"
+when = '[ "${STARSHIP_COCKPIT_SHELL_ENABLED:-true}" = "true" ]'
+format = "( $output )"
 disabled = false
 
 [shell]
