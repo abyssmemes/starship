@@ -24,7 +24,7 @@ $haskell\
 $python\
 $package\
 $docker_context\
-$kubernetes\
+${custom.kubernetes}\
 ${custom.shell}\
 $container\
 $jobs\
@@ -274,6 +274,12 @@ format = '[( $symbol( $version) )]($style)'
 symbol = ""
 style = "fg:color_docker"
 format = '[( $symbol( $context) )]($style)'
+
+[custom.kubernetes]
+command = "starship module kubernetes"
+when = '[ "${STARSHIP_COCKPIT_KUBERNETES_ENABLED:-true}" = "true" ]'
+format = "( $output )"
+disabled = false
 
 [kubernetes]
 symbol = "󱃾"
