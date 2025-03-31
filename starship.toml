@@ -278,6 +278,7 @@ format = '[( $symbol( $context) )]($style)'
 [custom.kubernetes]
 command = "starship module kubernetes"
 when = '[ "${STARSHIP_COCKPIT_KUBERNETES_ENABLED:-true}" = "true" ]'
+shell = "sh"
 format = "( $output )"
 disabled = false
 
@@ -290,6 +291,7 @@ disabled = false
 [custom.shell]
 command = "starship module shell"
 when = '[ "${STARSHIP_COCKPIT_SHELL_ENABLED:-true}" = "true" ]'
+shell = "sh"
 format = "( $output )"
 disabled = false
 
@@ -324,6 +326,7 @@ number_threshold = 1
 [custom.memory_usage]
 command = "starship module memory_usage"
 when = '[ "${STARSHIP_COCKPIT_MEMORY_USAGE_ENABLED:-false}" = "true" ]'
+shell = "sh"
 format = "( $output )"
 disabled = false
 
@@ -345,6 +348,7 @@ if [ -n "$battery_info" ]; then
 fi
 """
 when = '[ "${STARSHIP_COCKPIT_BATTERY_ENABLED:-false}" = "true" ]'
+shell = "sh"
 format = "( $output )"
 disabled = false
 
@@ -430,4 +434,5 @@ symbol = "󰌌"
 style = "fg:color_other"
 format = '[( $symbol $output )]($style)'
 when = '[ "${STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED:-false}" = "true" ]'
+shell = "sh"
 disabled = false
