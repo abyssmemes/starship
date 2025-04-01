@@ -116,30 +116,3 @@ export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED=true
 export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ABC=ENG
 export STARSHIP_COCKPIT_KEYBOARD_LAYOUT_UKRAINIAN=UKR
 ```
-
-### Shell
-
-Environment variables:
-
-| Variable | Default | Possible values | Description  |
-| -------- | ------- | --------------- | ------------ |
-| `STARSHIP_COCKPIT_SHELL_ENABLED` | `true` | `true`, `false` | Enable or disable the shell module. |
-
-Example configuration:
-```bash
-export STARSHIP_COCKPIT_SHELL_ENABLED=false
-```
-
-### Kubernetes
-
-Environment variables:
-
-| Variable | Default | Possible values | Description  |
-| -------- | ------- | --------------- | ------------ |
-| `STARSHIP_COCKPIT_KUBERNETES_ENABLED` | `true` | `true`, `false` | Enable or disable the Kubernetes module. |
-
-Example configuration:
-```bash
-export STARSHIP_COCKPIT_KUBERNETES_ENABLED=false
-```
-

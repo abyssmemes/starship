@@ -24,8 +24,8 @@ $haskell\
 $python\
 $package\
 $docker_context\
-${custom.kubernetes}\
-${custom.shell}\
+$kubernetes\
+$shell\
 $container\
 $jobs\
 ${custom.memory_usage}\
@@ -275,24 +275,10 @@ symbol = ""
 style = "fg:color_docker"
 format = '( [$symbol( $context)]($style) )'
 
-[custom.kubernetes]
-command = "starship module kubernetes"
-when = '[ "${STARSHIP_COCKPIT_KUBERNETES_ENABLED:-true}" = "true" ]'
-shell = "sh"
-format = "( $output )"
-disabled = false
-
 [kubernetes]
 symbol = "󱃾"
 style = "fg:color_kubernetes"
 format = '( [($symbol( $cluster))]($style) )'
-disabled = false
-
-[custom.shell]
-command = "starship module shell"
-when = '[ "${STARSHIP_COCKPIT_SHELL_ENABLED:-true}" = "true" ]'
-shell = "sh"
-format = "( $output )"
 disabled = false
 
 [shell]
