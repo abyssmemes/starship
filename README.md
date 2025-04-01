@@ -15,7 +15,7 @@ Install [Starship](https://starship.rs/) and configure your shell to use it.
 
 ## Installation
 
-Copy the `starship.toml` file to your Starship configuration directory.
+Copy the [`starship.toml`](./starship.toml) file to your Starship configuration directory.
 
 > [!TIP]
 > More information about Starship configuration files can be found [here](https://starship.rs/config/#configuration).
