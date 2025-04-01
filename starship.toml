@@ -341,7 +341,7 @@ disabled = false
 command = """
 battery_info=$(starship module battery)
 if [ -n "$battery_info" ]; then
-    percent=$(echo "$battery_info" | grep -o '[0-9]*%%' | sed 's/%%//')
+    percent=$(echo "$battery_info" | grep -o '[0-9]*%' | sed 's/%//')
     if [ "$percent" -le "${STARSHIP_COCKPIT_BATTERY_THRESHOLD:-0}" ]; then
         echo "$battery_info" | sed 's/%%/%/'
     fi
