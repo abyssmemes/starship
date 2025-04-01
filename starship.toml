@@ -165,7 +165,7 @@ use_logical_path = true
 [git_branch]
 symbol = ""
 style = "fg:color_git"
-format = '[( $symbol $branch )]($style)'
+format = '( [$symbol $branch]($style) )'
 only_attached = true
 ignore_branches = []
 truncation_length = 25
@@ -175,7 +175,7 @@ disabled = false
 
 [git_commit]
 style = "fg:color_git"
-format = "[(( $tag)( @$hash) )]($style)"
+format = "( [($tag)(@$hash)]($style) )"
 commit_hash_length = 7
 only_detached = true
 tag_symbol = "󰓼 "
@@ -184,7 +184,7 @@ disabled = false
 
 [git_status]
 style = "fg:color_git"
-format = '[($ahead_behind )($all_status )]($style)'
+format = '([$ahead_behind]($style) )([$all_status]($style) )'
 stashed = "*${count}"
 ahead = "⇡${count}"
 behind = "⇣${count}"
@@ -200,7 +200,7 @@ ignore_submodules = false
 disabled = false
 
 [git_metrics]
-format = '[(([+$added]($added_style))([-$deleted]($deleted_style)) )](fg:color_git)'
+format = '([([+$added]($added_style))([-$deleted]($deleted_style))](fg:color_git) )'
 added_style = "fg:color_git_added"
 deleted_style = "fg:color_git_deleted"
 only_nonzero_diffs = true
@@ -208,7 +208,7 @@ disabled = false
 
 [git_state]
 style = "fg:color_danger"
-format = '[($state( $progress_current/$progress_total) )]($style bold)'
+format = '([$state( $progress_current/$progress_total)]($style bold) )'
 rebase = "REBASING"
 merge = "MERGING"
 revert = "REVERTING"
@@ -221,59 +221,59 @@ disabled = false
 [nodejs]
 symbol = ""
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [c]
 symbol = ""
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [rust]
 symbol = "󱘗"
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [golang]
 symbol = "󰟓"
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [php]
 symbol = ""
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [java]
 symbol = ""
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [kotlin]
 symbol = ""
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [haskell]
 symbol = ""
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [python]
 symbol = ""
 style = "fg:color_env"
-format = '[( $symbol( $version)( $virtualenv) )]($style)'
+format = '( [$symbol( $version)( $virtualenv)]($style) )'
 version_format = '${raw}'
 
 [package]
 disabled = false
 symbol = "󰏗"
 style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+format = '( [$symbol( $version)]($style) )'
 
 [docker_context]
 symbol = ""
 style = "fg:color_docker"
-format = '[( $symbol( $context) )]($style)'
+format = '( [$symbol( $context)]($style) )'
 
 [custom.kubernetes]
 command = "starship module kubernetes"
@@ -314,12 +314,12 @@ style = "fg:color_shell"
 
 [container]
 style = "fg:color_container"
-format = '[ $symbol $name ]($style)'
+format = '( [$symbol $name]($style) )'
 
 [jobs]
 symbol = "󰒋"
 style = "fg:color_other"
-format = '[ $symbol( $number) ]($style)'
+format = '( [$symbol( $number)]($style) )'
 symbol_threshold = 1
 number_threshold = 1
 
@@ -377,18 +377,18 @@ style = "fg:color_other"
 disabled = false
 time_format = "%R"
 style = "fg:color_time"
-format = '[ 󰔛 $time ]($style)'
+format = '( [󰔛 $time]($style) )'
 
 [cmd_duration]
 min_time = 2000
-format = '[ 󱫑 $duration ]($style)'
+format = '( [󱫑 $duration]($style) )'
 style = 'fg:color_duration'
 show_milliseconds = false
 disabled = false
 
 [status]
 disabled = false
-format = '[( $symbol( $common_meaning)( $signal_name) )]($style)'
+format = '( [$symbol( $common_meaning)( $signal_name)]($style) )'
 map_symbol = true
 pipestatus = true
 symbol = '󰅙'
@@ -432,7 +432,7 @@ fi
 """
 symbol = "󰌌"
 style = "fg:color_other"
-format = '[( $symbol $output )]($style)'
+format = '( [$symbol $output]($style) )'
 when = '[ "${STARSHIP_COCKPIT_KEYBOARD_LAYOUT_ENABLED:-false}" = "true" ]'
 shell = "sh"
 disabled = false
