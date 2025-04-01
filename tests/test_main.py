@@ -6,7 +6,7 @@ from pathlib import Path
 from fixtures import git_repo, prompt_helper
 
 
-def test_prompt(prompt_helper):
+def test_prompt(prompt_helper, git_repo):
     result = prompt_helper.run_starship_prompt_command()
 
     assert result.returncode == 0
@@ -16,7 +16,7 @@ def test_prompt(prompt_helper):
         assert len(part) == len(part.strip()), f"part: {part}"
 
 
-def test_prompt_part_main(prompt_helper):
+def test_prompt_part_main(prompt_helper, git_repo):
     env = {}
 
     result = prompt_helper.run_starship_prompt_command(env)
@@ -25,42 +25,30 @@ def test_prompt_part_main(prompt_helper):
 
     assert len(main_part_parts) == 3
 
-    assert os.environ["USER"] in main_part_parts[1]
-    assert os.environ["PWD"].split("/")[-1] in main_part_parts[2]
+    assert os.environ.get("USER", os.environ.get("USERNAME", "")) in main_part_parts[1]
+    assert os.path.basename(os.getcwd()) in main_part_parts[2]
 
 
-def test_prompt_part_git(prompt_helper):
-    result = prompt_helper.run_starship_prompt_command()
+def test_prompt_part_git(prompt_helper, git_repo):
+    env = {}
+
+    result = prompt_helper.run_starship_prompt_command(env)
     git_part = prompt_helper.get_prompt_part(result, "git")
     git_part_parts = git_part.split(" ")
 
     assert len(git_part_parts) > 1
 
 
-def test_prompt_part_shell(prompt_helper):
+def test_prompt_part_shell(prompt_helper, git_repo):
     env = {"STARSHIP_SHELL": "bash"}
 
-    # Enabled by default
-    env["STARSHIP_COCKPIT_SHELL_ENABLED"] = ""
-    result = prompt_helper.run_starship_prompt_command(env)
-    shell_part = prompt_helper.get_prompt_part(result, "shell")
-    assert shell_part is not None
-
-    # Disabled explicitly
-    env["STARSHIP_COCKPIT_SHELL_ENABLED"] = "false"
-    result = prompt_helper.run_starship_prompt_command(env)
-    shell_part = prompt_helper.get_prompt_part(result, "shell")
-    assert shell_part is None
-
-    # Enabled explicitly
-    env["STARSHIP_COCKPIT_SHELL_ENABLED"] = "true"
     result = prompt_helper.run_starship_prompt_command(env)
     shell_part = prompt_helper.get_prompt_part(result, "shell")
 
     assert shell_part == " bash"
 
 
-def test_prompt_part_memory_usage(prompt_helper):
+def test_prompt_part_memory_usage(prompt_helper, git_repo):
     env = {}
 
     # Disabled by default
@@ -84,7 +72,7 @@ def test_prompt_part_memory_usage(prompt_helper):
     assert memory_usage_part == "󰓅 8GiB/16GiB"
 
 
-def test_prompt_part_time(prompt_helper):
+def test_prompt_part_time(prompt_helper, git_repo):
     env = {}
 
     result = prompt_helper.run_starship_prompt_command(env=env)

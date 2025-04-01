@@ -7,8 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  test-unix:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        shell: [bash, zsh, sh, pwsh]
+      fail-fast: false
     
     steps:
     - uses: actions/checkout@v3
@@ -22,17 +26,105 @@ jobs:
       run: |
         curl -sS https://starship.rs/install.sh | sh -s -- --yes
 
+    - name: Install shell dependencies
+      run: |
+        if [ "${{ matrix.shell }}" = "zsh" ]; then
+          sudo apt-get update
+          sudo apt-get install -y zsh
+        fi
+      shell: bash
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      shell: bash
         
     - name: Configure git
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
+      shell: bash
         
-    - name: Run tests
-      run: |
-        pytest tests
+    - name: Run tests with bash
+      if: matrix.shell == 'bash'
+      run: pytest tests
+      shell: bash
+      
+    - name: Run tests with zsh
+      if: matrix.shell == 'zsh'
+      run: pytest tests
+      shell: 'zsh -e {0}'
+      
+    - name: Run tests with sh
+      if: matrix.shell == 'sh'
+      run: pytest tests
+      shell: sh
+      
+    - name: Run tests with pwsh
+      if: matrix.shell == 'pwsh'
+      run: pytest tests
+      shell: pwsh
+
+  # test-windows:
+  #   runs-on: windows-latest
+  #   strategy:
+  #     matrix:
+  #       shell: [powershell, cmd]
+  #     fail-fast: false
+    
+  #   steps:
+  #   - uses: actions/checkout@v3
+    
+  #   - name: Set up Python
+  #     uses: actions/setup-python@v4
+  #     with:
+  #       python-version: '3.10'
+
+  #   - name: Install Starship
+  #     shell: powershell
+  #     run: |
+  #       # Download and install Starship for Windows
+  #       # Create bin directory in a location that's in PATH
+  #       New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.starship\bin"
+        
+  #       # Download latest release from GitHub
+  #       $releases = "https://github.com/starship/starship/releases"
+  #       $latestRelease = (Invoke-WebRequest $releases/latest -Headers @{"Accept"="application/json"} -UseBasicParsing | ConvertFrom-Json).tag_name
+  #       $url = "$releases/download/$latestRelease/starship-x86_64-pc-windows-msvc.zip"
+        
+  #       # Download and extract
+  #       $output = "$env:TEMP\starship.zip"
+  #       Invoke-WebRequest -Uri $url -OutFile $output
+  #       Expand-Archive -Path $output -DestinationPath "$env:USERPROFILE\.starship\bin" -Force
+        
+  #       # Add to PATH for current session
+  #       $env:Path += ";$env:USERPROFILE\.starship\bin"
+  #       echo "$env:USERPROFILE\.starship\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        
+  #       # Check if installation succeeded
+  #       starship --version
+
+  #   - name: Install dependencies
+  #     run: |
+  #       python -m pip install --upgrade pip
+  #       pip install pytest
+  #       if (Test-Path requirements.txt) { pip install -r requirements.txt }
+  #     shell: powershell
+        
+  #   - name: Configure git
+  #     run: |
+  #       git config --global user.name "GitHub Actions"
+  #       git config --global user.email "actions@github.com"
+  #     shell: powershell
+        
+  #   - name: Run tests with PowerShell
+  #     if: matrix.shell == 'powershell'
+  #     run: pytest tests
+  #     shell: powershell
+      
+  #   - name: Run tests with CMD
+  #     if: matrix.shell == 'cmd'
+  #     run: pytest tests
+  #     shell: cmd
